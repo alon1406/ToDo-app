@@ -353,6 +353,18 @@ body {
   font-size: 1.125rem;
 }
 
+.todo-form-error {
+  grid-column: 1 / -1;
+  margin: 0 0 var(--spacing-sm) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-danger);
+  background: #fef2f2;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-sm);
+}
+
 .todo-form-actions {
   margin-top: 0.25rem;
   display: flex;
@@ -381,6 +393,17 @@ body {
 
 .todo-form-actions .btn-add-task:active {
   transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.todo-form-actions .btn-add-task:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.todo-form-actions .btn-add-task:disabled:hover {
+  transform: none;
   box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
 }
 
@@ -627,6 +650,31 @@ body {
 .todo-item-hour {
   font-size: var(--font-size-base);
   color: var(--color-text);
+  white-space: nowrap;
+}
+
+.todo-item-overdue .todo-item-date,
+.todo-item-overdue .todo-item-hour .todo-item-hour-value {
+  color: #ef4444;
+}
+
+.todo-item-hour {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.todo-item-overdue-badge {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #ef4444;
+  background: #fef2f2;
+  border-radius: 4px;
   white-space: nowrap;
 }
 

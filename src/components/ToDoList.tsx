@@ -4,6 +4,19 @@ import type { Todo } from '../types/todo'
 import { IconEmpty } from './Icons'
 import { ProgressBar } from './ProgressBar'
 
+function isOverdue(todo: Todo): boolean {
+  if (todo.status === 'completed') return false
+  if (!todo.date) return false
+  const d = new Date(todo.date)
+  if (todo.hour) {
+    const [h, m] = todo.hour.split(':').map(Number)
+    d.setHours(h ?? 0, m ?? 0, 0, 0)
+  } else {
+    d.setHours(23, 59, 59, 999)
+  }
+  return d.getTime() <= Date.now()
+}
+
 export interface TodoListProps {
   todos: Todo[]
   totalCount: number
@@ -71,10 +84,12 @@ export const TodoList = ({ todos, totalCount, completedCount, onToggle, onDelete
           <div className="todo-list-header-cell todo-list-header-hour">Hour</div>
           <div className="todo-list-header-cell todo-list-header-actions">Actions</div>
         </div>
-        {todos.map((todo) => (
+        {todos.map((todo) => {
+          const overdue = isOverdue(todo)
+          return (
           <motion.div
             key={todo.id}
-            className={`todo-item ${todo.status === 'completed' ? 'todo-item-completed' : ''}`}
+            className={`todo-item ${todo.status === 'completed' ? 'todo-item-completed' : ''} ${overdue ? 'todo-item-overdue' : ''}`}
             initial={{ opacity: 0, x: -24 }}
             animate={{
               opacity: deletingId === todo.id ? 0 : 1,
@@ -123,7 +138,20 @@ export const TodoList = ({ todos, totalCount, completedCount, onToggle, onDelete
               <div className="todo-item-title">{todo.title}</div>
               <div className="todo-item-description" dir="auto">{todo.description || '—'}</div>
               <div className="todo-item-date">{todo.date}</div>
-              <div className="todo-item-hour">{todo.hour ?? '—'}</div>
+              <div className="todo-item-hour">
+                <span className="todo-item-hour-value">{todo.hour ?? '—'}</span>
+                {overdue && (
+                  <motion.span
+                    className="todo-item-overdue-badge"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    aria-label="Overdue"
+                  >
+                    Overdue
+                  </motion.span>
+                )}
+              </div>
               <div className="todo-item-actions">
                 <button type="button" className="btn btn-small" onClick={() => startEdit(todo)}>Edit</button>
                 <button type="button" className="btn btn-small btn-danger" onClick={() => handleDelete(todo.id)}>Delete</button>
@@ -131,7 +159,8 @@ export const TodoList = ({ todos, totalCount, completedCount, onToggle, onDelete
             </>
           )}
           </motion.div>
-        ))}
+          )
+        })}
       </div>
     </>
   )
