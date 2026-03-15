@@ -1,0 +1,746 @@
+/* ========== Design tokens – high-end SaaS ========== */
+:root {
+  --color-bg: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-focus: #3b82f6;
+  --color-accent: #4f46e5;
+  --color-button-bg: #4f46e5;
+  --color-button-text: #fff;
+  --color-button-hover: #4338ca;
+  --color-button-active: #3730a3;
+  --color-tab-bg: transparent;
+  --color-tab-selected-bg: #4f46e5;
+  --color-tab-selected-text: #fff;
+  --color-danger: #b91c1c;
+  --color-danger-hover: #991b1b;
+  --color-completed: #059669;
+  --color-completed-bg: #d1fae5;
+  --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+  --transition-fast: 0.2s ease;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-size-base: 1.125rem;
+  --font-size-lg: 1.25rem;
+  --font-size-heading: 1.375rem;
+  --font-size-hero: 1.75rem;
+  --line-height: 1.55;
+
+  --spacing-xs: 0.375rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* *, *::before, *::after: all elements – reset box model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+/* html, body: page shell – full viewport height */
+html, body {
+  min-height: 100vh;
+}
+
+/* #root: React mount point in index.html */
+#root {
+  min-height: 100vh;
+}
+
+/* body: page default – font, color, smoothing */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Search ========== */
+.search-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* .search-input:hover – hover state */
+.search-input:hover {
+  border-color: #c0c0c0;
+}
+
+/* .search-input:focus – focus ring when not inside .header-search */
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* ========== Cards (sections) ========== */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+}
+
+.card-add {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  min-width: 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 992px) {
+  .card-add {
+    max-width: 100%;
+    position: sticky;
+    top: var(--spacing-lg);
+  }
+}
+
+.card-add .section-title {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  font-size: var(--font-size-heading);
+  font-weight: 700;
+}
+
+.card-add .section-title svg {
+  color: var(--color-button-bg);
+}
+
+.section-title {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-heading);
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.section-title svg {
+  color: var(--color-button-bg);
+}
+
+/* ========== Tabs ========== */
+/* .tabs: filter tablist in App.tsx – All / Active / Completed */
+.tabs {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* .tab: each filter button in App.tsx */
+.tab {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* .tab:hover – hover state */
+.tab:hover {
+  border-color: var(--color-button-bg);
+  color: var(--color-button-bg);
+}
+
+/* .tab[aria-selected="true"] – selected filter tab */
+.tab[aria-selected="true"] {
+  background: var(--color-tab-selected-bg);
+  border-color: var(--color-tab-selected-bg);
+  color: var(--color-tab-selected-text);
+}
+
+/* .tab:focus-visible – keyboard focus ring */
+.tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* ========== Todo form (Add new) – balanced, centered ========== */
+.todo-form {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1rem 1.25rem;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 540px) {
+  .todo-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-add .todo-form {
+    grid-template-columns: 1fr;
+  }
+  .card-add .todo-form-field:nth-child(2) {
+    grid-column: 1;
+  }
+}
+
+.todo-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.todo-form-field:first-child {
+  grid-column: 1;
+}
+
+.todo-form-field:nth-child(2) {
+  grid-column: 2;
+}
+
+@media (max-width: 540px) {
+  .todo-form-field:nth-child(2) {
+    grid-column: 1;
+  }
+}
+
+.todo-form-datetime-wrap {
+  grid-column: 1 / -1;
+}
+
+.todo-form-actions {
+  grid-column: 1 / -1;
+}
+
+.todo-form-label {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.todo-form-title,
+.todo-form-desc {
+  width: 100%;
+  font-size: 1.125rem;
+  padding: 12px 14px;
+  min-height: 48px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.todo-form-title {
+  max-width: 100%;
+}
+
+.todo-form-desc {
+  min-height: 3rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.todo-form-title:focus,
+.todo-form-desc:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.todo-form-title::placeholder,
+.todo-form-desc::placeholder {
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+}
+
+.todo-form-datetime-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.todo-form-datetime-wrap .todo-form-label {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.todo-form-datetime {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.todo-form-datetime input {
+  flex: 1;
+  min-width: 9rem;
+  min-height: 48px;
+  font-size: 1.125rem;
+  padding: 12px 14px;
+  padding-right: 2.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Ensure date input shows full dd/mm/yyyy (day part was clipping) */
+.todo-form-datetime input[type="date"] {
+  min-width: 12.5rem;
+}
+
+.todo-form-datetime input[type="time"] {
+  min-width: 8rem;
+}
+
+.todo-form-datetime input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.todo-form-datetime input::-webkit-calendar-picker-indicator {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.2rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.todo-form-datetime input::-webkit-datetime-edit {
+  font-size: 1.125rem;
+}
+
+.todo-form-actions {
+  margin-top: 0.25rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.todo-form-actions .btn-add-task {
+  width: 200px;
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.todo-form-actions .btn-add-task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+}
+
+.todo-form-actions .btn-add-task:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* ========== Buttons ========== */
+/* .btn: base class for all buttons (TodoInput, TodoList, App tabs) */
+.btn {
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), transform 0.1s ease;
+}
+
+/* .btn:focus-visible – keyboard focus ring for buttons */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* .btn-primary: main action – "Add task" in TodoInput, "Save" in TodoList edit */
+.btn-primary {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  border: none;
+}
+
+/* .btn-primary:hover – hover state */
+.btn-primary:hover {
+  background: var(--color-button-hover);
+}
+
+/* .btn-primary:active – pressed state */
+.btn-primary:active {
+  background: var(--color-button-active);
+  transform: scale(0.98);
+}
+
+/* .btn-secondary: secondary action – "Cancel" in TodoList edit */
+.btn-secondary {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+}
+
+/* .btn-secondary:hover – hover state */
+.btn-secondary:hover {
+  border-color: var(--color-text-muted);
+  background: #f5f5f5;
+}
+
+/* .btn-small: small buttons – Edit, Delete in TodoList rows */
+.btn-small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.9375rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+/* .btn-small:hover – hover state */
+.btn-small:hover {
+  background: #f0f0f0;
+}
+
+/* .btn-danger: destructive action – Delete in TodoList */
+.btn-danger {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* .btn-danger:hover – hover state */
+.btn-danger:hover {
+  background: var(--color-danger);
+  color: #fff;
+  border-color: var(--color-danger);
+}
+
+/* ========== Progress bar (completed / total tasks) ========== */
+.progress-bar-wrap {
+  margin-bottom: var(--spacing-md);
+}
+.progress-bar-track {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-button-bg);
+  border-radius: 999px;
+  min-width: 0;
+}
+.progress-bar-label {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ========== To-Do list grid (TodoList) – 6 columns: Check | Title | Description | Date | Hour | Actions ========== */
+.todo-list-grid {
+  --todo-cols: 50px 200px minmax(0, 1fr) 150px 80px 180px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.todo-list-header {
+  display: grid;
+  grid-template-columns: var(--todo-cols);
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #e7e5e4;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-border);
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.todo-list-header-cell {
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-width: 0;
+  border-right: 1px solid var(--color-border);
+}
+
+.todo-list-header-cell:last-child {
+  border-right: none;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: var(--todo-cols);
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 3rem;
+  align-items: center;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.2s ease;
+}
+
+.todo-item:nth-child(even) {
+  background: #fafafb;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+/* Edit mode: same 6-column grid as normal row, aligns with headers */
+.todo-item-edit-wrap.todo-edit-form {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--todo-cols);
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fafaf9;
+  min-height: 3rem;
+  align-items: stretch;
+}
+
+.todo-edit-cell {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-right: 1px solid var(--color-border);
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.todo-edit-cell:last-child {
+  border-right: none;
+}
+
+.todo-edit-check {
+  min-width: 0;
+}
+
+.todo-edit-description {
+  align-items: stretch;
+}
+
+.todo-edit-description .todo-edit-input {
+  align-self: stretch;
+  min-height: 2.5rem;
+}
+
+.todo-item .todo-item-check,
+.todo-item .todo-item-title,
+.todo-item .todo-item-description,
+.todo-item .todo-item-date,
+.todo-item .todo-item-hour,
+.todo-item .todo-item-actions {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-right: 1px solid var(--color-border);
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.todo-item .todo-item-actions {
+  border-right: none;
+}
+
+.todo-item-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item-title {
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.todo-item-description {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--color-text);
+  text-align: start;
+  padding: 0 15px;
+}
+
+.todo-item-date,
+.todo-item-hour {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.todo-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Completed: line-through + opacity 0.5 on entire row */
+.todo-item-completed .todo-item-check,
+.todo-item-completed .todo-item-title,
+.todo-item-completed .todo-item-description,
+.todo-item-completed .todo-item-date,
+.todo-item-completed .todo-item-hour,
+.todo-item-completed .todo-item-actions {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: var(--color-text-muted);
+}
+
+.todo-item-completed .todo-item-check {
+  text-decoration: none;
+}
+
+/* .btn-check: completion toggle (✓) – 18×18px, centered, no stretch */
+.btn-check {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  padding: 0;
+  border: 2px solid var(--color-border);
+  border-radius: 3px;
+  background: var(--color-surface);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.btn-check:hover {
+  border-color: var(--color-button-bg);
+}
+
+.btn-check span:not(:empty) {
+  color: var(--color-completed);
+  font-weight: bold;
+}
+
+.todo-item-completed .btn-check {
+  background: var(--color-completed-bg);
+  border-color: var(--color-completed);
+}
+
+/* Edit mode inputs: fill cell, focus ring */
+.todo-edit-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.todo-edit-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.todo-edit-textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  min-height: 2.5rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.todo-edit-cell.todo-edit-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========== Empty state ========== */
+/* .empty-state: "No tasks yet" block in TodoList.tsx when list is empty */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+}
+
+.empty-state svg {
+  display: block;
+  margin: 0 auto var(--spacing-md);
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  font-weight: 500;
+}
